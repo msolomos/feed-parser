@@ -57,11 +57,14 @@ if new_posts:
         soup = BeautifulSoup(summary, 'html.parser')
         clean_summary = soup.get_text()
 
+        # Αντικατάσταση νέων γραμμών με HTML break lines
+        formatted_summary = clean_summary.replace("\n", "<br><br>")
+
         # Προσθήκη της ανάρτησης στο email περιεχόμενο
         content += f"<h2>{entry.title}</h2>"
         content += f"<p><strong>Date:</strong> {post_date_str}</p>"
-        content += f"<p><strong>Summary:</strong> {clean_summary}</p>"
-        content += f"<p><a href='{entry.link}'>Read more</a></p><br>"
+        content += f"<p><strong>Summary:</strong> {formatted_summary}</p>"
+        content += f"<p><a href='{entry.link}'>Read more</a></p><br><br>"
 
     # Ρυθμίσεις email
 		from_email = 'your-email@gmail.com'
